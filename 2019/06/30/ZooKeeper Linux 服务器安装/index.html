@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>ZooKeeper Linux 服务器安装 | xboat&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="需要安装 Java 环境 环境检查12345678910$ cat /etc/redhat-releaseRed Hat Enterprise Linux Server release 7.5 (Maipo)$ java -versionjava version &quot;1.8.0_181&quot;Java(TM) SE Runtime Environment (build 1.8.0_181-b13)Java">
+<meta name="keywords" content="ZooKeeper">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ZooKeeper Linux 服务器安装">
+<meta property="og:url" content="http://yoursite.com/2019/06/30/ZooKeeper Linux 服务器安装/index.html">
+<meta property="og:site_name" content="xboat&#39;s Blog">
+<meta property="og:description" content="需要安装 Java 环境 环境检查12345678910$ cat /etc/redhat-releaseRed Hat Enterprise Linux Server release 7.5 (Maipo)$ java -versionjava version &quot;1.8.0_181&quot;Java(TM) SE Runtime Environment (build 1.8.0_181-b13)Java">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-06-30T14:48:08.970Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ZooKeeper Linux 服务器安装">
+<meta name="twitter:description" content="需要安装 Java 环境 环境检查12345678910$ cat /etc/redhat-releaseRed Hat Enterprise Linux Server release 7.5 (Maipo)$ java -versionjava version &quot;1.8.0_181&quot;Java(TM) SE Runtime Environment (build 1.8.0_181-b13)Java">
+  
+    <link rel="alternate" href="/atom.xml" title="xboat&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">xboat&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-ZooKeeper Linux 服务器安装" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+  <!-- 不蒜子统计 -->
+  <span id="busuanzi_container_page_pv" style='display:none' class="article-date">
+        <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+  </span>
+
+
+<a href="/2019/06/30/ZooKeeper Linux 服务器安装/" class="article-date">
+  <time datetime="2019-06-30T12:12:56.000Z" itemprop="datePublished">2019-06-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ZooKeeper Linux 服务器安装
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>需要安装 Java 环境</p>
+<h3 id="环境检查"><a href="#环境检查" class="headerlink" title="环境检查"></a>环境检查</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ cat /etc/redhat-release</span><br><span class="line">Red Hat Enterprise Linux Server release 7.5 (Maipo)</span><br><span class="line"></span><br><span class="line">$ java -version</span><br><span class="line">java version <span class="string">"1.8.0_181"</span></span><br><span class="line">Java(TM) SE Runtime Environment (build 1.8.0_181-b13)</span><br><span class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.181-b13, mixed mode)</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$JAVA_HOME</span></span><br><span class="line">/home/redhad/soft/jdk1.8.0_181</span><br></pre></td></tr></table></figure>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ wget http://mirrors.hust.edu.cn/apache/zookeeper/zookeeper-3.4.10/zookeeper-3.4.10.tar.gz</span><br><span class="line">$ tar -zxvf zookeeper-3.4.10.tar.gz</span><br></pre></td></tr></table></figure>
+<p>进入解压目录<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> zookeeper-3.4.10/</span><br></pre></td></tr></table></figure></p>
+<p>conf/目录下有个zoo_sample.cfg，复制一份命名为zoo.cfg<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cp zoo_sample.cfg zoo.cfg</span><br></pre></td></tr></table></figure></p>
+<p>zoo.cfg 文件内容<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">$ vi conf/zoo.cfg </span><br><span class="line"></span><br><span class="line"><span class="comment"># The number of milliseconds of each tick</span></span><br><span class="line">tickTime=2000</span><br><span class="line"><span class="comment"># The number of ticks that the initial </span></span><br><span class="line"><span class="comment"># synchronization phase can take</span></span><br><span class="line">initLimit=10</span><br><span class="line"><span class="comment"># The number of ticks that can pass between </span></span><br><span class="line"><span class="comment"># sending a request and getting an acknowledgement</span></span><br><span class="line">syncLimit=5</span><br><span class="line"><span class="comment"># the directory where the snapshot is stored.</span></span><br><span class="line"><span class="comment"># do not use /tmp for storage, /tmp here is just </span></span><br><span class="line"><span class="comment"># example sakes.</span></span><br><span class="line">dataDir=/tmp/zookeeper/data</span><br><span class="line">dataLogDir=/tmp/zookeeper/logs</span><br><span class="line"><span class="comment"># the port at which the clients will connect</span></span><br><span class="line">clientPort=2181</span><br><span class="line"><span class="comment"># the maximum number of client connections.</span></span><br><span class="line"><span class="comment"># increase this if you need to handle more clients</span></span><br><span class="line"><span class="comment">#maxClientCnxns=60</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Be sure to read the maintenance section of the </span></span><br><span class="line"><span class="comment"># administrator guide before turning on autopurge.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># http://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_maintenance</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># The number of snapshots to retain in dataDir</span></span><br><span class="line"><span class="comment">#autopurge.snapRetainCount=3</span></span><br><span class="line"><span class="comment"># Purge task interval in hours</span></span><br><span class="line"><span class="comment"># Set to "0" to disable auto purge feature</span></span><br><span class="line"><span class="comment">#autopurge.purgeInterval=1</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ bin/zkServer.sh start</span><br><span class="line">ZooKeeper JMX enabled by default</span><br><span class="line">Using config: /home/boat/zookeeper-3.4.10/bin/../conf/zoo.cfg</span><br><span class="line">Starting zookeeper ... STARTED</span><br></pre></td></tr></table></figure>
+<h3 id="查看状态"><a href="#查看状态" class="headerlink" title="查看状态"></a>查看状态</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ bin/zkServer.sh status</span><br><span class="line">ZooKeeper JMX enabled by default</span><br><span class="line">Using config: /home/boat/zookeeper-3.4.10/bin/../conf/zoo.cfg</span><br><span class="line">Mode: standalone</span><br></pre></td></tr></table></figure>
+<p>查看端口号是否被占用<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ netstat -lpn | grep 2181</span><br></pre></td></tr></table></figure></p>
+<h3 id="启动-Cli"><a href="#启动-Cli" class="headerlink" title="启动 Cli"></a>启动 Cli</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#zkCli.sh命令默认以主机号 127.0.0.1，端口号 2181 来连接zk</span></span><br><span class="line">$ bin/zkCli.sh </span><br><span class="line"></span><br><span class="line">Connecting to localhost:2181</span><br><span class="line">2019-02-17 23:42:15,403 [myid:] - INFO  [main-SendThread(localhost:2181):ClientCnxn<span class="variable">$SendThread</span>@1032] - Opening socket connection to server localhost/127.0.0.1:2181. Will not attempt to authenticate using SASL (unknown error)</span><br><span class="line">Welcome to ZooKeeper!</span><br><span class="line"></span><br><span class="line">WATCHER::</span><br><span class="line"></span><br><span class="line">WatchedEvent state:SyncConnected <span class="built_in">type</span>:None path:null</span><br><span class="line">[zk: localhost:2181(CONNECTED) 0]</span><br></pre></td></tr></table></figure>
+<h3 id="创建节点及查看"><a href="#创建节点及查看" class="headerlink" title="创建节点及查看"></a>创建节点及查看</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[zk: localhost:2181(CONNECTED) 0] create /zktest 186</span><br><span class="line">Created /zktest</span><br><span class="line">[zk: localhost:2181(CONNECTED) 1] ls / </span><br><span class="line">[dubbo, zktest, zookeeper]</span><br><span class="line">[zk: localhost:2181(CONNECTED) 2] get /zktest</span><br><span class="line">186</span><br><span class="line">cZxid = 0xf4</span><br><span class="line">ctime = Fri Jun 21 02:06:52 PDT 2019</span><br><span class="line">mZxid = 0xf4</span><br><span class="line">mtime = Fri Jun 21 02:06:52 PDT 2019</span><br><span class="line">pZxid = 0xf4</span><br><span class="line">cversion = 0</span><br><span class="line">dataVersion = 0</span><br><span class="line">aclVersion = 0</span><br><span class="line">ephemeralOwner = 0x0</span><br><span class="line">dataLength = 3</span><br><span class="line">numChildren = 0</span><br><span class="line">[zk: localhost:2181(CONNECTED) 3] ls /dubbo  </span><br><span class="line">[com.example.demoWeb.DemoService, com.example.dubbo.DemoService]</span><br></pre></td></tr></table></figure>
+<h3 id="停用-zookeeper"><a href="#停用-zookeeper" class="headerlink" title="停用 zookeeper"></a>停用 zookeeper</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ bin/zkServer.sh stop</span><br><span class="line">ZooKeeper JMX enabled by default</span><br><span class="line">Using config: /home/boat/zookeeper-3.4.10/bin/../conf/zoo.cfg</span><br><span class="line">Stopping zookeeper ... STOPPED</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/06/30/ZooKeeper Linux 服务器安装/" data-id="cjxj2lq1f0000m4vmg28xibuo" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ZooKeeper/">ZooKeeper</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/06/02/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dubbo/">Dubbo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elasticsearch/">Elasticsearch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Security/">Security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ZooKeeper/">ZooKeeper</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Dubbo/" style="font-size: 10px;">Dubbo</a> <a href="/tags/Elasticsearch/" style="font-size: 10px;">Elasticsearch</a> <a href="/tags/Security/" style="font-size: 20px;">Security</a> <a href="/tags/ZooKeeper/" style="font-size: 10px;">ZooKeeper</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/06/30/ZooKeeper Linux 服务器安装/">ZooKeeper Linux 服务器安装</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/02/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/24/Security 自定义登录过滤器/">Security 自定义登录过滤器</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/23/Security 登录功能实现/">Security 登录功能实现</a>
+          </li>
+        
+          <li>
+            <a href="/2019/02/15/Elasticsearch Linux 服务器安装/">Elasticsearch Linux 服务器安装</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 xboat<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      <br/>
+      
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_site_pv">
+                本站总访问量<span id="busuanzi_value_site_pv"></span>次
+        </span>
+        <span class="post-meta-divider">|</span>
+        <span id="busuanzi_container_site_uv" style='display:none'>
+                本站访客数<span id="busuanzi_value_site_uv"></span>人
+        </span>
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+      
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
